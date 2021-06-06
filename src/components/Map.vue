@@ -23,7 +23,9 @@ export default {
     init() {
       var BMapGL = window.BMapGL;
       let map = new BMapGL.Map("l-map");
+
       let latling = new BMapGL.Point(this.lng, this.lat);
+      console.log(22222222);
       map.centerAndZoom(latling, 14);
       map.enableScrollWheelZoom(true);
       this.map = map;
@@ -35,13 +37,14 @@ export default {
       var BMapGL = window.BMapGL;
       let latling = new BMapGL.Point(this.lng, this.lat);
       this.map.setCenter(latling);
+      this.createGeocoder();
     },
     createGeocoder() {
       //根据经纬度转化位置
       var BMapGL = window.BMapGL;
       var geo = new BMapGL.Geocoder();
       let latling = new BMapGL.Point(this.lng, this.lat);
-      geo.getLocation(latling, function (result) {
+      geo.getLocation(latling, (result) => {
         console.log(result);
       });
     },

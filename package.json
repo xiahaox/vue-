@@ -11,12 +11,28 @@
     "capacitor-init": "vue-cli-service capacitor-init",
     "capacitor-open": "vue-cli-service capacitor-open",
     "capacitor-update": "vue-cli-service capacitor-update",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "lint-staged": "lint-staged"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "pre-commit": "lint-staged",
+  "lint-staged": {
+    "*.js": [
+      "npm run lint",
+      "git add"
+    ],
+    "*.vue": [
+      "npm run lint",
+      "git add"
+    ]
   },
   "dependencies": {
     "@capacitor/cli": "^1.0.0-alpha.38",
     "@capacitor/core": "^1.0.0-alpha.38",
     "core-js": "^3.3.2",
+    "lint-staged": "^7.0.5",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3",
@@ -36,6 +52,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.12.2",
     "less-loader": "^5.0.0",
+    "pre-commit": "^1.2.2",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-pwa": "^1.0.0-alpha.1",

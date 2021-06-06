@@ -71,15 +71,16 @@ export default {
         fillColor: "blue",
         strokeWeight: 1,
         fillOpacity: 0.3,
-        strokeOpacity: 0.3,
+        strokeOpacity: 1,
       });
+      console.log(circle);
       this.getMap().addOverlay(circle);
     },
     CreateMarker: function () {
       var BMapGL = window.BMapGL;
       let latling = new BMapGL.Point(this.lng, this.lat);
       var marker = new BMapGL.Marker(latling, {
-        Animation: "BMAP_ANIMATION_DROP",
+        Animation: "BMAP_ANIMATION_BOUNCE",
       });
       this.marker = marker;
       // 将标注添加到地图
@@ -108,16 +109,33 @@ export default {
   },
   beforeMount() {
     setTimeout(() => {
-      //   this.lng = 116.404;
-      //   this.lat = 39.915;
-      this.lng = 121.465695;
-      this.lat = 29.943401;
-      setTimeout(() => {
-        this.CreateLabel();
-        this.Createcircle();
-        this.CreateMarker();
-        this.CreateSearch();
-      }, 0);
+      //   this.lng = 121.465721;
+      //   this.lat = 29.943587;
+
+      this.lng = 121.465731;
+      this.lat = 29.94356;
+
+      //   this.lng = 121.472104;
+      //   this.lat = 29.9497181;
+      var BMapGL = window.BMapGL;
+      new BMapGL.Convertor().translate(
+        [new BMapGL.Point(this.lng, this.lat)],
+        3,
+        5,
+        (port) => {
+          console.log(port);
+          console.log(111);
+          this.lng = port.points[0].lng;
+          this.lat = port.points[0].lat;
+          setTimeout(() => {
+            this.CreateLabel();
+            this.Createcircle();
+            this.CreateMarker();
+            this.CreateSearch();
+            // console.log(this.$refs.map);
+          }, 0);
+        }
+      );
     }, 0);
   },
   mounted() {},
